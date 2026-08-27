@@ -10,3 +10,5 @@ pinned: false
 
 # 🌍 Multilingual PDF Chatbot
 A RAG-powered multilingual PDF chatbot!
+
+https://multilingual-pdf-chatbot-wlq5puju8bwo6ywappwc72.streamlit.app/
