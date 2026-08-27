@@ -79,6 +79,28 @@ def load_css():
             border: 1px solid rgba(255,255,255,0.08);
         }
 
+        /* ── Fix chat text color ── */
+        [data-testid="stChatMessage"] p {
+            color: rgba(255,255,255,0.95) !important;
+        }
+
+        [data-testid="stChatMessage"] li {
+            color: rgba(255,255,255,0.95) !important;
+        }
+
+        [data-testid="stChatMessage"] strong {
+            color: #ffffff !important;
+        }
+
+        /* ── Fix all text on dark background ── */
+        .stMarkdown p {
+            color: rgba(255,255,255,0.90) !important;
+        }
+
+        section[data-testid="stSidebar"] p {
+            color: rgba(255,255,255,0.85) !important;
+        }
+
         /* ── Chat input ── */
         [data-testid="stChatInput"] {
             background: rgba(255,255,255,0.08) !important;
@@ -157,8 +179,8 @@ def load_css():
 
         /* ── Welcome banner ── */
         .welcome-banner {
-            background: linear-gradient(135deg, 
-                rgba(167,139,250,0.15), 
+            background: linear-gradient(135deg,
+                rgba(167,139,250,0.15),
                 rgba(96,165,250,0.15)
             );
             border: 1px solid rgba(167,139,250,0.3);
@@ -174,7 +196,7 @@ def load_css():
         }
 
         .welcome-banner p {
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.85) !important;
             font-size: 0.95rem;
         }
 
@@ -301,7 +323,6 @@ def main():
         initial_sidebar_state="expanded"
     )
 
-    # Load custom CSS
     load_css()
 
     # ── Session state ─────────────────────────────
@@ -383,10 +404,18 @@ def main():
 
         # ── Languages ─────────────────────────────
         st.markdown("<br>", unsafe_allow_html=True)
-        # ✅ New — using text instead of emoji
-        st.markdown('<div style="font-size:13px; font-weight:500; color:#a78bfa; padding-bottom:8px; border-bottom:0.5px solid rgba(167,139,250,0.3);">🌍 Languages</div>', unsafe_allow_html=True)
-        st.markdown('<p style="color: rgba(255,255,255,0.85); font-size: 18px; letter-spacing: 4px; ">🇩🇪 🇬🇧 🇫🇷 🇪🇸 🇮🇹 🇹🇷 🇦🇪 🇨🇳 🇯🇵 🇮🇳</p>', unsafe_allow_html=True)
-        st.markdown('<p style="color: rgba(255,255,255,0.6); font-size: 12px; ">Supports 50+ languages including German & English</p>', unsafe_allow_html=True)
+        st.markdown(
+            '<div style="font-size:13px; font-weight:500; color:#a78bfa; padding-bottom:8px; border-bottom:0.5px solid rgba(167,139,250,0.3);">🌍 Languages</div>',
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            '<p style="color:rgba(255,255,255,0.85); font-size:18px; letter-spacing:4px;">🇩🇪 🇬🇧 🇫🇷 🇪🇸 🇮🇹 🇹🇷 🇦🇪 🇨🇳 🇯🇵 🇮🇳</p>',
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            '<p style="color:rgba(255,255,255,0.6); font-size:12px;">Supports 50+ languages including German & English</p>',
+            unsafe_allow_html=True
+        )
 
         # ── Clear button ──────────────────────────
         st.markdown("<br>", unsafe_allow_html=True)
@@ -405,8 +434,8 @@ def main():
     </span>
 </h1>
 """, unsafe_allow_html=True)
-    
-    # Welcome banner when no PDFs uploaded
+
+    # Welcome banner
     if not st.session_state.processed:
         st.markdown("""
         <div class="welcome-banner">
@@ -450,13 +479,11 @@ def main():
                     )
                     st.write(answer)
 
-                    # Language badge
                     st.markdown(
                         f'<div class="lang-badge">🌍 {detected_language}</div>',
                         unsafe_allow_html=True
                     )
 
-                    # Source chunks
                     with st.expander("📚 Source chunks used"):
                         for i, doc in enumerate(source_docs):
                             source_name = doc.metadata.get("source", "Unknown")
