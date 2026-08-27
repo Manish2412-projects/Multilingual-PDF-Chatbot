@@ -3,8 +3,8 @@ title: Multilingual PDF Chatbot
 emoji: 🌍
 colorFrom: purple
 colorTo: blue
-sdk: streamlit
-sdk_version: 1.32.0
+sdk: gradio
+sdk_version: 4.0.0
 app_file: app.py
 pinned: false
 ---
@@ -22,6 +22,6 @@ A RAG-powered chatbot that answers questions from uploaded PDFs in 50+ languages
 
 ## Built With
 - LangChain + FAISS
-- Groq AI (LLaMA 3)
+- Groq AI
 - HuggingFace Embeddings
 - Streamlit
